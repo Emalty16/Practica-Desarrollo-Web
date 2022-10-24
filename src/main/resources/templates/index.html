@@ -1,15 +1,51 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
+        <title>PLANTILLA</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+       </br>
+       </br>
+       
+       
+       <a th:href="@{/nuevoPais}">Nuevo Pais</a>
+       <br/>
+       <br/>
+        <div th:if="${paises != null and !paises.empty}">
+       <table border="1">
+           <thead>
+               <tr>
+                   <th>Pais</th>
+                   <th>Capital</th>
+                   <th>Estado</th>
+                   <th>Poblacion</th>
+                   <th>Presidente</th>
+                   
+                   
+                   <th>Modificar</th>
+                   <th>Eliminar</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr th:each="item : ${paises}" >
+                   <td th:text="${item.pais}"></td>
+                   <td th:text="${item.capital}"></td>
+                   <td th:text="${item.estado}"></td>
+                   <td th:text="${item.poblacion}"></td>
+                   <td th:text="${item.presidente}"></td>
+                   
+                   <td> <a th:href="@{/modificarPais/} +  ${item.idPais}">Modificar</a></td>
+                   <td> <a th:href="@{/eliminarPais/} +  ${item.idPais}">Eliminar</a></td>
+               </tr>
+           </tbody>
+       </table>
+    </div>
+       <div th:if="${paises = null or paises.empty}">
+           La lista de paises esta vacia
+       </div>
     </body>
 </html>
+
